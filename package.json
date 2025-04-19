@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "clean": "if [ -d dist ]; then rm -rf dist; fi",
-    "build": "npm run clean && npx prisma generate && npx tsc",
+    "build": "npx tsc",
     "start": "node --env-file .env dist/index.js --trace-warnings",
     "build:start": "npm run build && npm start",
     "gen": "node temp/routerGenerate.js",
