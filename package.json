@@ -16,6 +16,7 @@
     "dc:down": "docker compose down --remove-orphans",
     "postbuild": "cp -R prisma/ dist/ && cp -R node_modules/.prisma dist/",
     "prisma:migrate": "prisma migrate deploy",
+    "postinstall": "prisma generate",
     "start": "node dist/index.js",
     "build": "tsc",
     "prisma:generate": "prisma generate --schema=prisma/schema.prisma"

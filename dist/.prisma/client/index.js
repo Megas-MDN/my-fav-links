@@ -150,10 +150,6 @@ const config = {
         "fromEnvVar": null,
         "value": "debian-openssl-3.0.x",
         "native": true
-      },
-      {
-        "fromEnvVar": null,
-        "value": "linux-musl-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -179,8 +175,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  binaryTargets = [\"native\", \"linux-musl-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel Card {\n  id         String    @id @default(uuid())\n  title      String\n  imageUrl   String?\n  lastViewed DateTime?\n  order      Int\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  urls       Url[]\n}\n\nmodel Url {\n  id        String   @id @default(uuid())\n  value     String\n  cardId    String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  card      Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)\n}\n",
-  "inlineSchemaHash": "8684128cc6d2b5e5e6b0ed46688fccf8a98075d3f91298a93f3e05d07d6aeb66",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel Card {\n  id         String    @id @default(uuid())\n  title      String\n  imageUrl   String?\n  lastViewed DateTime?\n  order      Int\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  urls       Url[]\n}\n\nmodel Url {\n  id        String   @id @default(uuid())\n  value     String\n  cardId    String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  card      Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)\n}\n",
+  "inlineSchemaHash": "b54c8a8064aa0cc2439d72da3ffe24b76deb2a8d9960ca0b3d4e0abae00b1635",
   "copyEngine": true
 }
 
@@ -221,10 +217,6 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
 path.join(process.cwd(), "node_modules/.prisma/client/libquery_engine-debian-openssl-3.0.x.so.node")
-
-// file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-linux-musl-openssl-3.0.x.so.node");
-path.join(process.cwd(), "node_modules/.prisma/client/libquery_engine-linux-musl-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "node_modules/.prisma/client/schema.prisma")
