@@ -42,7 +42,10 @@ export class CardModel {
   }
 
   async getById(idCard: string) {
-    return prisma.card.findUnique({ where: { id: idCard } });
+    return prisma.card.findUnique({
+      where: { id: idCard },
+      include: { urls: true },
+    });
   }
 
   async create(data: TCreateCard) {
@@ -53,6 +56,7 @@ export class CardModel {
     return prisma.card.update({
       where: { id: idCard },
       data: { ...data, updatedAt: new Date() },
+      include: { urls: true },
     });
   }
 
