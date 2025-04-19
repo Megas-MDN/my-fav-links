@@ -11,15 +11,16 @@ const logs_1 = require("./middlewares/logs");
 const _index_1 = require("./routes/_index");
 const notImplemented_1 = require("./middlewares/notImplemented");
 const errorHandler_1 = require("./middlewares/errorHandler");
-exports.app = (0, express_1.default)();
-exports.app.use((0, cors_1.default)({
+const app = (0, express_1.default)();
+exports.app = app;
+app.use((0, cors_1.default)({
     origin: "*",
     credentials: true,
 }));
-exports.app.use(express_1.default.json({ limit: "100mb" }));
-exports.app.use(express_1.default.urlencoded({ limit: "100mb", extended: true }));
-exports.app.use(express_1.default.static("public"));
-exports.app.use(logs_1.logs);
-exports.app.use(_index_1.routes);
-exports.app.use(notImplemented_1.notImplemented);
-exports.app.use(errorHandler_1.errorHandler);
+app.use(express_1.default.json({ limit: "100mb" }));
+app.use(express_1.default.urlencoded({ limit: "100mb", extended: true }));
+app.use(express_1.default.static("public"));
+app.use(logs_1.logs);
+app.use(_index_1.routes);
+app.use(notImplemented_1.notImplemented);
+app.use(errorHandler_1.errorHandler);

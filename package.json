@@ -5,8 +5,6 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "clean": "if [ -d dist ]; then rm -rf dist; fi",
-    "build": "tsc",
-    "start": "node dist/index.js",
     "build:start": "npm run build && npm start",
     "gen": "node temp/routerGenerate.js",
     "db:up": "docker compose -f docker-compose-db.yml up -d --build",
@@ -15,7 +13,12 @@
     "dc:bkp": "docker exec -t postgres pg_dumpall -c -U postgres > backup.sql",
     "dc:restore": "cat backup.sql | docker exec -i postgres psql -U postgres",
     "dc:up": "npm run db:up && docker compose up -d --build && docker compose logs -f api",
-    "dc:down": "docker compose down --remove-orphans"
+    "dc:down": "docker compose down --remove-orphans",
+    "postbuild": "cp -R prisma/ dist/ && cp -R node_modules/.prisma dist/",
+    "prisma:migrate": "prisma migrate deploy",
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "prisma:generate": "prisma generate --schema=prisma/schema.prisma"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
