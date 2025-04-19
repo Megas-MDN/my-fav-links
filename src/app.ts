@@ -5,7 +5,7 @@ import { logs } from "./middlewares/logs";
 import { routes } from "./routes/_index";
 import { notImplemented } from "./middlewares/notImplemented";
 import { errorHandler } from "./middlewares/errorHandler";
-export const app = express();
+const app = express();
 
 app.use(
   cors({
@@ -21,3 +21,5 @@ app.use(logs);
 app.use(routes);
 app.use(notImplemented);
 app.use(errorHandler);
+
+export { app };

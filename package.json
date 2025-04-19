@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "clean": "if [ -d dist ]; then rm -rf dist; fi",
-    "build": "npx tsc",
-    "start": "node --env-file .env dist/index.js --trace-warnings",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "build:start": "npm run build && npm start",
     "gen": "node temp/routerGenerate.js",
     "db:up": "docker compose -f docker-compose-db.yml up -d --build",
