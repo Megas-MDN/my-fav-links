@@ -1,7 +1,7 @@
 const fs = require("fs/promises");
 const path = require("path");
 const exec = require("child_process").exec;
-const rootSrc = path.resolve(__dirname, "..", "src");
+const rootSrc = path.resolve("src");
 const routerFolder = path.resolve(rootSrc, "routes");
 const controllerFolder = path.resolve(rootSrc, "controllers");
 const serviceFolder = path.resolve(rootSrc, "services");
@@ -10,7 +10,7 @@ const constants = path.resolve(rootSrc, "constants");
 const validations = path.resolve(rootSrc, "validations");
 
 //********************************************* */
-let newResourceName = ""; /// O nome da rota aqui
+let newResourceName = "Card"; // O nome da rota aqui no singula minhaRouta
 //********************************************* */
 
 const indexRouteFolder = "_index.ts";
@@ -19,8 +19,8 @@ const basePathFile = "basePathRoutes.ts";
 const apiVersion = "V1";
 const pointOfTheLastImport = `export const routes = Router();`;
 const routeUseName = "routes.use";
-let importMiddleAuth = ""; // `import { auth } from "../auth";`;
-let authName = "";
+let importMiddleAuth = "";//`import { auth } from "../auth";`;
+let authName = "";//"auth";
 
 const customRequest = `import { CustomRequest } from "../types/custom";`;
 
@@ -73,19 +73,13 @@ const basePathFileGen = async () => {
 const routeFileGen = async () => {
   const route = `
 import { Router } from "express";
-${importMiddleAuth ? importMiddleAuth : ""}
 import { ${up1(newResourceName)}Controller } from "../controllers/${up1(
     newResourceName,
   )}Controller";
-import { ${up1(newResourceName)}Service } from "../services/${up1(
-    newResourceName,
-  )}Service";
-import { ${up1(newResourceName)}Model } from "../models/${up1(
-    newResourceName,
-  )}Model";
+${importMiddleAuth ? importMiddleAuth : ""}
 import { API_VERSION, ROOT_PATH } from "../constants/basePathRoutes";
 
-const BASE_PATH = API_VERSION.${apiVersion} + ROOT_PATH.${newResourceName.toUpperCase()}; // /api/${apiVersion.toLowerCase()}/${newResourceName.toLowerCase()}
+const BASE_PATH = API_VERSION.${apiVersion} + ROOT_PATH.${newResourceName.toUpperCase()}; // /api/${apiVersion.toLowerCase()}/${toLashCase(newResourceName)}
 
 const ${newResourceName}Routes = Router();
 
@@ -94,6 +88,30 @@ const ${newResourceName}Controller = new ${up1(newResourceName)}Controller();
 ${newResourceName}Routes.get(\`\${BASE_PATH}\`${
     authName ? `, ${authName}` : ""
   }, async (req, res) => { await ${newResourceName}Controller.listAll(req, res) });
+
+${newResourceName}Routes.get(\`\${BASE_PATH}\/:id${up1(newResourceName)}\`${
+    authName ? `, ${authName}` : ""
+  }, async (req, res) => {
+  await ${newResourceName}Controller.getById(req, res);
+});
+
+${newResourceName}Routes.post(\`\${BASE_PATH}\`${
+    authName ? `, ${authName}` : ""
+  }, async (req, res) => {
+  await ${newResourceName}Controller.create(req, res);
+});
+
+${newResourceName}Routes.put(\`\${BASE_PATH}\/:id${up1(newResourceName)}\`${
+    authName ? `, ${authName}` : ""
+  }, async (req, res) => {
+  await ${newResourceName}Controller.update(req, res);
+});
+
+${newResourceName}Routes.delete(\`\${BASE_PATH}\/:id${up1(newResourceName)}\`${
+    authName ? `, ${authName}` : ""
+  }, async (req, res) => {
+  await ${newResourceName}Controller.delete(req, res);
+});
 
 export { ${newResourceName}Routes };  
 `.trim();
@@ -121,6 +139,29 @@ export class ${up1(newResourceName)}Controller {
     const result = await this.${newResourceName}Service.listAll(req.query);
     return res.status(STATUS_CODE.OK).json(result);
   }
+  
+  async getById(req: CustomRequest<unknown>, res: Response) {
+    const result = await this.${newResourceName}Service.getById(Number(req.params.id${up1(newResourceName)}));
+    return res.status(STATUS_CODE.OK).json(result);
+  }
+
+  async create(req: CustomRequest<unknown>, res: Response) {
+    const result = await this.${newResourceName}Service.create(req.body);
+    return res.status(STATUS_CODE.CREATED).json(result);
+  }
+
+  async update(req: CustomRequest<unknown>, res: Response) {
+    const result = await this.${newResourceName}Service.update(
+      Number(req.params.id${up1(newResourceName)}),
+      req.body,
+    );
+    return res.status(STATUS_CODE.OK).json(result);
+  }
+
+  async delete(req: CustomRequest<unknown>, res: Response) {
+    const result = await this.${newResourceName}Service.delete(Number(req.params.id${up1(newResourceName)}));
+    return res.status(STATUS_CODE.OK).json(result);
+  }
 }
   `.trim();
   await fs.writeFile(
@@ -130,11 +171,13 @@ export class ${up1(newResourceName)}Controller {
 };
 
 const serviceFileGen = async () => {
-  const service = `
-import { ${up1(newResourceName)}Model } from "../models/${up1(
-    newResourceName,
-  )}Model";
+  const service =
+    `import { ${up1(newResourceName)}Model } from "../models/${up1(
+      newResourceName,
+    )}Model";
 import { querySchema } from "../validations/Queries/listAll";
+import { create${up1(newResourceName)}Schema } from "../validations/${up1(newResourceName)}/create${up1(newResourceName)}Schema";
+import { update${up1(newResourceName)}Schema } from "../validations/${up1(newResourceName)}/update${up1(newResourceName)}Schema";
 
 export class ${up1(newResourceName)}Service {
   private ${newResourceName}Model = new ${up1(newResourceName)}Model()
@@ -142,6 +185,24 @@ export class ${up1(newResourceName)}Service {
   async listAll(query: unknown) {
     const validQuery = querySchema.parse(query);
     return this.${newResourceName}Model.listAll(validQuery);
+  }
+    
+  async getById(id${up1(newResourceName)}: number) {
+    return this.${newResourceName}Model.getById(id${up1(newResourceName)});
+  }
+
+  async create(data: unknown) {
+    const validData = create${up1(newResourceName)}Schema.parse(data);
+    return this.${newResourceName}Model.create(validData);
+  }
+
+  async update(id${up1(newResourceName)}: number, data: unknown) {
+    const validData = update${up1(newResourceName)}Schema.parse(data);
+    return this.${newResourceName}Model.update(id${up1(newResourceName)}, validData);
+  }
+
+  async delete(id${up1(newResourceName)}: number) {
+    return this.${newResourceName}Model.delete(id${up1(newResourceName)});
   }
 }
   `.trim();
@@ -152,20 +213,78 @@ export class ${up1(newResourceName)}Service {
   );
 };
 
+const isPlural = (str) => {
+  if (str[str.length - 1] === "s") {
+    return true;
+  }
+  return false;
+};
 const modelFileGen = async () => {
+  const singular = isPlural(newResourceName)
+    ? newResourceName.substring(0, newResourceName.length - 1)
+    : newResourceName;
   const model = `import { prisma } from "../db/prisma";
-  import { TQuery } from "../validations/Queries/listAll";
+import { TQuery } from "../validations/Queries/listAll";
+import { TCreate${up1(newResourceName)} } from "../validations/${up1(newResourceName)}/create${up1(newResourceName)}Schema";
+import { TUpdate${up1(newResourceName)} } from "../validations/${up1(newResourceName)}/update${up1(newResourceName)}Schema";
 
 export class ${up1(newResourceName)}Model {
+  async totalCount(query: TQuery) {
+    return prisma.${singular}.count({
+      where: {
+        name: {
+          contains: query.search,
+        },
+        deletedAt: null,
+      },
+    });
+  }
+
   async listAll(query: TQuery) {
-    const limit = query.limit || 20;
+    const limit = query.limit || 0;
     const skip = query.page ? query.page * limit : query.offset || 0;
     const orderBy =
       query.orderBy?.map(({ field, direction }) => ({
         [field]: direction,
       })) || [];
 
-    return { result: [], totalCount: 0, limit, skip, orderBy };
+    const result = await prisma.${singular}.findMany({
+      where: {
+        name: {
+          contains: query.search,
+        },
+        deletedAt: null,
+      },
+      take: limit || undefined,
+      skip,
+      orderBy,
+    });
+
+    const totalCount = await this.totalCount(query);
+
+    return { result, totalCount };
+  }
+
+  async getById(id${up1(singular)}: number) {
+    return prisma.${singular}.findUnique({ where: { id${up1(singular)} } });
+  }
+
+  async create(data: TCreate${up1(newResourceName)}) {
+    return prisma.${singular}.create({ data });
+  }
+
+  async update(id${up1(singular)}: number, data: TUpdate${up1(newResourceName)}) {
+    return prisma.${singular}.update({
+      where: { id${up1(singular)} },
+      data,
+    });
+  }
+
+  async delete(id${up1(singular)}: number) {
+    return prisma.${singular}.update({
+      where: { id${up1(singular)} },
+      data: { deletedAt: new Date() },
+    });
   }
 }
   `.trim();
@@ -175,7 +294,6 @@ export class ${up1(newResourceName)}Model {
     model,
   );
 };
-
 
 const genZodValiddations = async () => {
   const folder = path.resolve(validations, up1(newResourceName));
@@ -205,19 +323,15 @@ export type TUpdate${up1(newResourceName)} = z.infer<typeof update${up1(newResou
   );
 };
 
-
 const setResourceName = () => {
-  const resourceName =  process.argv[process.argv.length - 1]
-
-  newResourceName =
-    resourceName
-      ? resourceName
-      : newResourceName;
+  if (process.argv.length < 3) return;
+  const resourceName = process.argv[process.argv.length - 1];
+  newResourceName = resourceName ? resourceName : newResourceName;
 };
 
 const main = async () => {
   setResourceName();
-  if(!newResourceName) return;
+  if (!newResourceName) return;
   try {
     await fs.readFile(
       path.resolve(controllerFolder, `${up1(newResourceName)}Controller.ts`),
@@ -234,13 +348,13 @@ const main = async () => {
 
   console.log("Recursos com sucesso");
 
-  exec(`npx prettier --write .`, (error, stdout) => {
-    if (error) {
-      console.error(`Erro ao executar prettier o arquivo: ${error.message}`);
-    }
+  // exec(`npx prettier --write .`, (error, stdout) => {
+  //   if (error) {
+  //     console.error(`Erro ao executar prettier o arquivo: ${error.message}`);
+  //   }
 
-    console.log(`Saiu com sucesso do prettier: ${stdout}`);
-  });
+  //   console.log(`Saiu com sucesso do prettier: ${stdout}`);
+  // });
 };
 
 main();
