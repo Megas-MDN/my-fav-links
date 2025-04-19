@@ -19,7 +19,7 @@ app.use((0, cors_1.default)({
 }));
 app.use(express_1.default.json({ limit: "100mb" }));
 app.use(express_1.default.urlencoded({ limit: "100mb", extended: true }));
-app.use(express_1.default.static("public"));
+// app.use(express.static("public"));
 app.use(logs_1.logs);
 app.use(_index_1.routes);
 app.use(notImplemented_1.notImplemented);
