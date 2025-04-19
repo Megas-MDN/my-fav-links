@@ -9,4 +9,3 @@ package-lock*
 lib-cov
 logs/
 *.log
-dist/
