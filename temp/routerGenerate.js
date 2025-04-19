@@ -10,7 +10,7 @@ const constants = path.resolve(rootSrc, "constants");
 const validations = path.resolve(rootSrc, "validations");
 
 //********************************************* */
-let newResourceName = "Card"; // O nome da rota aqui no singula minhaRouta
+let newResourceName = "card"; // O nome da rota aqui no singula minhaRouta
 //********************************************* */
 
 const indexRouteFolder = "_index.ts";
