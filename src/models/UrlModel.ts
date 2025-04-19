@@ -16,7 +16,7 @@ export class UrlModel {
 
   async listAll(query: TQuery) {
     const limit = query.limit || 0;
-    const skip = query.page ? query.page * limit : query.offset || 0;
+    const skip = query.page ? (query.page - 1) * limit : query.offset || 0;
     const orderBy =
       query.orderBy?.map(({ field, direction }) => ({
         [field]: direction,

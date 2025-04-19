@@ -16,7 +16,7 @@ export class CardModel {
 
   async listAll(query: TQuery) {
     const limit = query.limit || 0;
-    const skip = query.page ? query.page * limit : query.offset || 0;
+    const skip = query.page ? (query.page - 1) * limit : query.offset || 0;
     const orderBy =
       query.orderBy?.map(({ field, direction }) => ({
         [field]: direction,
@@ -27,6 +27,9 @@ export class CardModel {
         title: {
           contains: query.search,
         },
+      },
+      include: {
+        urls: true,
       },
       take: limit || undefined,
       skip,
