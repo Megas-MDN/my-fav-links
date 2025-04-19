@@ -1,7 +1,7 @@
 const fs = require("fs/promises");
 const path = require("path");
 const exec = require("child_process").exec;
-const rootSrc = path.resolve("src");
+const rootSrc = path.resolve(__dirname, "..", "src");
 const routerFolder = path.resolve(rootSrc, "routes");
 const controllerFolder = path.resolve(rootSrc, "controllers");
 const serviceFolder = path.resolve(rootSrc, "services");
