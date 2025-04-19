@@ -30,7 +30,7 @@ export class CardModel {
       },
       take: limit || undefined,
       skip,
-      orderBy,
+      orderBy: orderBy.length > 0 ? orderBy : { lastViewed: "asc" },
     });
 
     const totalCount = await this.totalCount(query);
