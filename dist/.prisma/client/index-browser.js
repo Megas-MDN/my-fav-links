@@ -123,6 +123,7 @@ exports.Prisma.CardScalarFieldEnum = {
   imageUrl: 'imageUrl',
   lastViewed: 'lastViewed',
   order: 'order',
+  lastPage: 'lastPage',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

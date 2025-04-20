@@ -7,4 +7,5 @@ exports.createCardSchema = zod_1.z.object({
     imageUrl: zod_1.z.string().min(1, "Image URL is required").optional(),
     lastViewed: zod_1.z.string().optional(),
     order: zod_1.z.number().min(1, "Order must be greater than 0"),
+    lastPage: zod_1.z.number().min(1, "Order must be greater than 0").optional(),
 });

@@ -1004,10 +1004,12 @@ export namespace Prisma {
 
   export type CardAvgAggregateOutputType = {
     order: number | null
+    lastPage: number | null
   }
 
   export type CardSumAggregateOutputType = {
     order: number | null
+    lastPage: number | null
   }
 
   export type CardMinAggregateOutputType = {
@@ -1016,6 +1018,7 @@ export namespace Prisma {
     imageUrl: string | null
     lastViewed: Date | null
     order: number | null
+    lastPage: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1026,6 +1029,7 @@ export namespace Prisma {
     imageUrl: string | null
     lastViewed: Date | null
     order: number | null
+    lastPage: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1036,6 +1040,7 @@ export namespace Prisma {
     imageUrl: number
     lastViewed: number
     order: number
+    lastPage: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1044,10 +1049,12 @@ export namespace Prisma {
 
   export type CardAvgAggregateInputType = {
     order?: true
+    lastPage?: true
   }
 
   export type CardSumAggregateInputType = {
     order?: true
+    lastPage?: true
   }
 
   export type CardMinAggregateInputType = {
@@ -1056,6 +1063,7 @@ export namespace Prisma {
     imageUrl?: true
     lastViewed?: true
     order?: true
+    lastPage?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1066,6 +1074,7 @@ export namespace Prisma {
     imageUrl?: true
     lastViewed?: true
     order?: true
+    lastPage?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1076,6 +1085,7 @@ export namespace Prisma {
     imageUrl?: true
     lastViewed?: true
     order?: true
+    lastPage?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1173,6 +1183,7 @@ export namespace Prisma {
     imageUrl: string | null
     lastViewed: Date | null
     order: number
+    lastPage: number | null
     createdAt: Date
     updatedAt: Date
     _count: CardCountAggregateOutputType | null
@@ -1202,6 +1213,7 @@ export namespace Prisma {
     imageUrl?: boolean
     lastViewed?: boolean
     order?: boolean
+    lastPage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     urls?: boolean | Card$urlsArgs<ExtArgs>
@@ -1214,6 +1226,7 @@ export namespace Prisma {
     imageUrl?: boolean
     lastViewed?: boolean
     order?: boolean
+    lastPage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["card"]>
@@ -1224,6 +1237,7 @@ export namespace Prisma {
     imageUrl?: boolean
     lastViewed?: boolean
     order?: boolean
+    lastPage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["card"]>
@@ -1234,11 +1248,12 @@ export namespace Prisma {
     imageUrl?: boolean
     lastViewed?: boolean
     order?: boolean
+    lastPage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "lastViewed" | "order" | "createdAt" | "updatedAt", ExtArgs["result"]["card"]>
+  export type CardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "lastViewed" | "order" | "lastPage" | "createdAt" | "updatedAt", ExtArgs["result"]["card"]>
   export type CardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     urls?: boolean | Card$urlsArgs<ExtArgs>
     _count?: boolean | CardCountOutputTypeDefaultArgs<ExtArgs>
@@ -1257,6 +1272,7 @@ export namespace Prisma {
       imageUrl: string | null
       lastViewed: Date | null
       order: number
+      lastPage: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["card"]>
@@ -1688,6 +1704,7 @@ export namespace Prisma {
     readonly imageUrl: FieldRef<"Card", 'String'>
     readonly lastViewed: FieldRef<"Card", 'DateTime'>
     readonly order: FieldRef<"Card", 'Int'>
+    readonly lastPage: FieldRef<"Card", 'Int'>
     readonly createdAt: FieldRef<"Card", 'DateTime'>
     readonly updatedAt: FieldRef<"Card", 'DateTime'>
   }
@@ -3198,6 +3215,7 @@ export namespace Prisma {
     imageUrl: 'imageUrl',
     lastViewed: 'lastViewed',
     order: 'order',
+    lastPage: 'lastPage',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -3313,6 +3331,7 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"Card"> | string | null
     lastViewed?: DateTimeNullableFilter<"Card"> | Date | string | null
     order?: IntFilter<"Card"> | number
+    lastPage?: IntNullableFilter<"Card"> | number | null
     createdAt?: DateTimeFilter<"Card"> | Date | string
     updatedAt?: DateTimeFilter<"Card"> | Date | string
     urls?: UrlListRelationFilter
@@ -3324,6 +3343,7 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     lastViewed?: SortOrderInput | SortOrder
     order?: SortOrder
+    lastPage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     urls?: UrlOrderByRelationAggregateInput
@@ -3338,6 +3358,7 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"Card"> | string | null
     lastViewed?: DateTimeNullableFilter<"Card"> | Date | string | null
     order?: IntFilter<"Card"> | number
+    lastPage?: IntNullableFilter<"Card"> | number | null
     createdAt?: DateTimeFilter<"Card"> | Date | string
     updatedAt?: DateTimeFilter<"Card"> | Date | string
     urls?: UrlListRelationFilter
@@ -3349,6 +3370,7 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     lastViewed?: SortOrderInput | SortOrder
     order?: SortOrder
+    lastPage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CardCountOrderByAggregateInput
@@ -3367,6 +3389,7 @@ export namespace Prisma {
     imageUrl?: StringNullableWithAggregatesFilter<"Card"> | string | null
     lastViewed?: DateTimeNullableWithAggregatesFilter<"Card"> | Date | string | null
     order?: IntWithAggregatesFilter<"Card"> | number
+    lastPage?: IntNullableWithAggregatesFilter<"Card"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Card"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Card"> | Date | string
   }
@@ -3432,6 +3455,7 @@ export namespace Prisma {
     imageUrl?: string | null
     lastViewed?: Date | string | null
     order: number
+    lastPage?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     urls?: UrlCreateNestedManyWithoutCardInput
@@ -3443,6 +3467,7 @@ export namespace Prisma {
     imageUrl?: string | null
     lastViewed?: Date | string | null
     order: number
+    lastPage?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     urls?: UrlUncheckedCreateNestedManyWithoutCardInput
@@ -3454,6 +3479,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastViewed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    lastPage?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     urls?: UrlUpdateManyWithoutCardNestedInput
@@ -3465,6 +3491,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastViewed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    lastPage?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     urls?: UrlUncheckedUpdateManyWithoutCardNestedInput
@@ -3476,6 +3503,7 @@ export namespace Prisma {
     imageUrl?: string | null
     lastViewed?: Date | string | null
     order: number
+    lastPage?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3486,6 +3514,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastViewed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    lastPage?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3496,6 +3525,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastViewed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    lastPage?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3607,6 +3637,17 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3639,12 +3680,14 @@ export namespace Prisma {
     imageUrl?: SortOrder
     lastViewed?: SortOrder
     order?: SortOrder
+    lastPage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type CardAvgOrderByAggregateInput = {
     order?: SortOrder
+    lastPage?: SortOrder
   }
 
   export type CardMaxOrderByAggregateInput = {
@@ -3653,6 +3696,7 @@ export namespace Prisma {
     imageUrl?: SortOrder
     lastViewed?: SortOrder
     order?: SortOrder
+    lastPage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3663,12 +3707,14 @@ export namespace Prisma {
     imageUrl?: SortOrder
     lastViewed?: SortOrder
     order?: SortOrder
+    lastPage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type CardSumOrderByAggregateInput = {
     order?: SortOrder
+    lastPage?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -3735,6 +3781,22 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -3808,6 +3870,14 @@ export namespace Prisma {
 
   export type IntFieldUpdateOperationsInput = {
     set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
@@ -3910,6 +3980,17 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3955,17 +4036,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -4005,6 +4075,33 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -4078,6 +4175,7 @@ export namespace Prisma {
     imageUrl?: string | null
     lastViewed?: Date | string | null
     order: number
+    lastPage?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -4088,6 +4186,7 @@ export namespace Prisma {
     imageUrl?: string | null
     lastViewed?: Date | string | null
     order: number
+    lastPage?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -4114,6 +4213,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastViewed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    lastPage?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4124,6 +4224,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastViewed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    lastPage?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
