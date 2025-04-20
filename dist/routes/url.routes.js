@@ -4,6 +4,7 @@ exports.urlRoutes = void 0;
 const express_1 = require("express");
 const UrlController_1 = require("../controllers/UrlController");
 const basePathRoutes_1 = require("../constants/basePathRoutes");
+const auth_1 = require("../auth");
 const BASE_PATH = basePathRoutes_1.API_VERSION.V1 + basePathRoutes_1.ROOT_PATH.URL; // /api/v1/url
 const urlRoutes = (0, express_1.Router)();
 exports.urlRoutes = urlRoutes;
@@ -14,12 +15,12 @@ urlRoutes.get(`${BASE_PATH}`, async (req, res) => {
 urlRoutes.get(`${BASE_PATH}/:idUrl`, async (req, res) => {
     await urlController.getById(req, res);
 });
-urlRoutes.post(`${BASE_PATH}`, async (req, res) => {
+urlRoutes.post(`${BASE_PATH}`, auth_1.auth, async (req, res) => {
     await urlController.create(req, res);
 });
-urlRoutes.put(`${BASE_PATH}/:idUrl`, async (req, res) => {
+urlRoutes.put(`${BASE_PATH}/:idUrl`, auth_1.auth, async (req, res) => {
     await urlController.update(req, res);
 });
-urlRoutes.delete(`${BASE_PATH}/:idUrl`, async (req, res) => {
+urlRoutes.delete(`${BASE_PATH}/:idUrl`, auth_1.auth, async (req, res) => {
     await urlController.delete(req, res);
 });

@@ -2,6 +2,7 @@ import { Router } from "express";
 import { UrlController } from "../controllers/UrlController";
 
 import { API_VERSION, ROOT_PATH } from "../constants/basePathRoutes";
+import { auth } from "../auth";
 
 const BASE_PATH = API_VERSION.V1 + ROOT_PATH.URL; // /api/v1/url
 
@@ -17,15 +18,15 @@ urlRoutes.get(`${BASE_PATH}/:idUrl`, async (req, res) => {
   await urlController.getById(req, res);
 });
 
-urlRoutes.post(`${BASE_PATH}`, async (req, res) => {
+urlRoutes.post(`${BASE_PATH}`, auth, async (req, res) => {
   await urlController.create(req, res);
 });
 
-urlRoutes.put(`${BASE_PATH}/:idUrl`, async (req, res) => {
+urlRoutes.put(`${BASE_PATH}/:idUrl`, auth, async (req, res) => {
   await urlController.update(req, res);
 });
 
-urlRoutes.delete(`${BASE_PATH}/:idUrl`, async (req, res) => {
+urlRoutes.delete(`${BASE_PATH}/:idUrl`, auth, async (req, res) => {
   await urlController.delete(req, res);
 });
 

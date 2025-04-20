@@ -4,6 +4,7 @@ exports.cardRoutes = void 0;
 const express_1 = require("express");
 const CardController_1 = require("../controllers/CardController");
 const basePathRoutes_1 = require("../constants/basePathRoutes");
+const auth_1 = require("../auth");
 const BASE_PATH = basePathRoutes_1.API_VERSION.V1 + basePathRoutes_1.ROOT_PATH.CARD; // /api/v1/card
 const cardRoutes = (0, express_1.Router)();
 exports.cardRoutes = cardRoutes;
@@ -14,12 +15,12 @@ cardRoutes.get(`${BASE_PATH}`, async (req, res) => {
 cardRoutes.get(`${BASE_PATH}/:idCard`, async (req, res) => {
     await cardController.getById(req, res);
 });
-cardRoutes.post(`${BASE_PATH}`, async (req, res) => {
+cardRoutes.post(`${BASE_PATH}`, auth_1.auth, async (req, res) => {
     await cardController.create(req, res);
 });
-cardRoutes.put(`${BASE_PATH}/:idCard`, async (req, res) => {
+cardRoutes.put(`${BASE_PATH}/:idCard`, auth_1.auth, async (req, res) => {
     await cardController.update(req, res);
 });
-cardRoutes.delete(`${BASE_PATH}/:idCard`, async (req, res) => {
+cardRoutes.delete(`${BASE_PATH}/:idCard`, auth_1.auth, async (req, res) => {
     await cardController.delete(req, res);
 });
