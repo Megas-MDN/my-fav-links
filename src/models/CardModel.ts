@@ -33,7 +33,7 @@ export class CardModel {
       },
       take: limit || undefined,
       skip,
-      orderBy: orderBy.length > 0 ? orderBy : { lastViewed: "asc" },
+      orderBy: orderBy.length > 0 ? orderBy : { order: "asc" },
     });
 
     const totalCount = await this.totalCount(query);

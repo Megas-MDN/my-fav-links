@@ -22,6 +22,10 @@ cardRoutes.post(`${BASE_PATH}`, auth, async (req, res) => {
   await cardController.create(req, res);
 });
 
+cardRoutes.put(`${BASE_PATH}/reorder`, auth, async (req, res) => {
+  await cardController.reorder(req, res);
+});
+
 cardRoutes.put(`${BASE_PATH}/:idCard`, auth, async (req, res) => {
   await cardController.update(req, res);
 });
