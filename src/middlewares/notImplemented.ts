@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { API_VERSION, ROOT_PATH } from "../constants/basePathRoutes";
 import { STATUS_CODE } from "../constants/statusCode";
+import path from "path";
 
 export const notImplemented = (
   req: Request,
@@ -9,8 +10,13 @@ export const notImplemented = (
 ) => {
   const { authorization } = req.headers;
 
-  return next({
-    status: STATUS_CODE.NOT_IMPLEMENTED,
+  const publicPath = path.join(__dirname, "../../public");
+  if (!req.url.startsWith("/api")) {
+    res.sendFile(path.join(publicPath, "index.html"));
+    return;
+  }
+
+  res.status(STATUS_CODE.NOT_IMPLEMENTED).send({
     message: "Route not Implemented",
     url: req.url,
     method: req.method,
@@ -22,4 +28,5 @@ export const notImplemented = (
     body: req.body,
     headers: req.headers,
   });
+  return;
 };

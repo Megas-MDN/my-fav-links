@@ -7,6 +7,9 @@ exports.API_VERSION = {
 };
 exports.ROOT_PATH = {
     HOME: "/",
-    CARD: "/card",
+    USER: "/user",
+    USERS: "/users",
     URL: "/url",
+    CARD: "/card",
+    FILE: "/file",
 };
