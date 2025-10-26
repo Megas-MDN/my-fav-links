@@ -25,11 +25,13 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
-app.get("*", (req, res) => {
+app.get("*", (req, res, next) => {
   if (!req.path.startsWith("/api")) {
-    res.sendFile(path.join(publicPath, "index.html"));
+    return res.sendFile(path.join(publicPath, "index.html"));
   }
+  return next();
 });
+
 app.use(logs);
 app.use(routes);
 app.use(notImplemented);

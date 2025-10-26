@@ -25,10 +25,11 @@ app.use(express_1.default.static(publicPath));
 app.get("/health", (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
-app.get("*", (req, res) => {
+app.get("*", (req, res, next) => {
     if (!req.path.startsWith("/api")) {
-        res.sendFile(path_1.default.join(publicPath, "index.html"));
+        return res.sendFile(path_1.default.join(publicPath, "index.html"));
     }
+    return next();
 });
 app.use(logs_1.logs);
 app.use(_index_1.routes);
