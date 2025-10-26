@@ -5,7 +5,10 @@ import { logs } from "./middlewares/logs";
 import { routes } from "./routes/_index";
 import { notImplemented } from "./middlewares/notImplemented";
 import { errorHandler } from "./middlewares/errorHandler";
+import path from "path";
+
 const app = express();
+const publicPath = path.join(__dirname, "../public");
 
 app.use(
   cors({
@@ -16,7 +19,17 @@ app.use(
 
 app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ limit: "100mb", extended: true }));
-// app.use(express.static("public"));
+app.use(express.static(publicPath));
+
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+app.get("*", (req, res) => {
+  if (!req.path.startsWith("/api")) {
+    res.sendFile(path.join(publicPath, "index.html"));
+  }
+});
 app.use(logs);
 app.use(routes);
 app.use(notImplemented);

@@ -11,15 +11,25 @@ const logs_1 = require("./middlewares/logs");
 const _index_1 = require("./routes/_index");
 const notImplemented_1 = require("./middlewares/notImplemented");
 const errorHandler_1 = require("./middlewares/errorHandler");
+const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 exports.app = app;
+const publicPath = path_1.default.join(__dirname, "../public");
 app.use((0, cors_1.default)({
     origin: "*",
     credentials: true,
 }));
 app.use(express_1.default.json({ limit: "100mb" }));
 app.use(express_1.default.urlencoded({ limit: "100mb", extended: true }));
-// app.use(express.static("public"));
+app.use(express_1.default.static(publicPath));
+app.get("/health", (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+app.get("*", (req, res) => {
+    if (!req.path.startsWith("/api")) {
+        res.sendFile(path_1.default.join(publicPath, "index.html"));
+    }
+});
 app.use(logs_1.logs);
 app.use(_index_1.routes);
 app.use(notImplemented_1.notImplemented);
