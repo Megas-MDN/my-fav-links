@@ -18,6 +18,9 @@ cardRoutes.get(`${BASE_PATH}/:idCard`, async (req, res) => {
 cardRoutes.post(`${BASE_PATH}`, auth_1.auth, async (req, res) => {
     await cardController.create(req, res);
 });
+cardRoutes.put(`${BASE_PATH}/reorder`, auth_1.auth, async (req, res) => {
+    await cardController.reorder(req, res);
+});
 cardRoutes.put(`${BASE_PATH}/:idCard`, auth_1.auth, async (req, res) => {
     await cardController.update(req, res);
 });
